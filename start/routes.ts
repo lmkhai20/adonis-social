@@ -31,6 +31,9 @@ Route.post('/login', 'AuthController.login').as('auth.login');
 Route.post('/register', 'AuthController.register').as('auth.register');
 Route.post('logout', 'AuthController.logout').as('auth.logout');
 
-Route.on('/profile').render('auth/profile').as('auth.profile')
+Route.on('/profile').render('auth/profile').as('auth.profile').middleware('auth');
+Route.post('/verify-email', 'EmailVerifiesController.index').as('email.verify').middleware('auth');
+Route.get('/verify-email/:email', 'EmailVerifiesController.confirm').as('verifyEmail');
+
 
 

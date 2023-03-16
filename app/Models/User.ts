@@ -1,6 +1,10 @@
 import { DateTime } from 'luxon'
 import Hash from '@ioc:Adonis/Core/Hash'
 import { column, beforeSave, BaseModel } from '@ioc:Adonis/Lucid/Orm'
+import Mail from '@ioc:Adonis/Addons/Mail'
+import { customAlphabet, nanoid   } from 'nanoid'
+import Env from '@ioc:Adonis/Core/Env'
+import Route from '@ioc:Adonis/Core/Route'
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
@@ -11,7 +15,7 @@ export default class User extends BaseModel {
 
   @column()
   public email: string
-  
+
   @column.dateTime()
   public email_verified_at: DateTime
 
@@ -35,5 +39,18 @@ export default class User extends BaseModel {
     if (user.$dirty.password) {
       user.password = await Hash.make(user.password)
     }
+  }
+
+  public async sendVerificationEmail(){
+    // const token = nanoid();
+    // session.put(`token-${this.id}`, token);
+    const url = Env.get('APP_URL') + Route.makeSignedUrl('verifyEmail', {params: {email: this.email}, expiresIn: '30m'});
+    await Mail.sendLater((message) => {
+      message
+        .from('verify@adonisgram.com')
+        .to(this.email)
+        .subject('Please verify your email')
+        .htmlView('emails/verify', { user: this, url })
+    })
   }
 }
