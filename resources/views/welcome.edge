@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  It work !!!
+  @if(auth.isAuthenticated)
+  <h3>{{auth.user.username}}</h3>
+  <form action="{{route('auth.logout')}}" method="POST">
+    <button type="submit">Sign out</button>
+  </form>
+  @else
+  <a href="{{route('auth.login.show')}}">Login</a>
+  @endif
+</body>
+</html>
