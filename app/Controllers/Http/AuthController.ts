@@ -1,6 +1,5 @@
 // import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
-import Mail from "@ioc:Adonis/Addons/Mail";
 import User from "App/Models/User";
 import RegisterValidator from "App/Validators/RegisterValidator";
 
@@ -15,10 +14,18 @@ export default class AuthController {
     }
 
     public async register({request, response}){
-        const user = await request.validate(RegisterValidator);
-        await User.create(user);
+        const req = await request.validate(RegisterValidator);
+        // user.sendVerificationEmail();
+        // await User.create(user);
 
         // send email
+        const user = new User;
+        user.name = req.name;
+        user.username = req.username;
+        user.email = req.email;
+        user.password = req.password;
+        await user.save();
+
         user.sendVerificationEmail();
 
         return response.redirect().toRoute('auth.login.show');
@@ -26,8 +33,8 @@ export default class AuthController {
 
     public async login({request, response, auth}){
         const { uid, password } = request.only(['uid', 'password']);
-        await auth.attempt(uid, password);
-        return response.redirect().toRoute('auth.profile');
+        const user = await auth.attempt(uid, password);
+        return response.redirect(`${user.username}`);
 
     }
 

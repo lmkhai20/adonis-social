@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/">Adonisgram</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        {{--  <a class="nav-item nav-link active" href="">All Courses <span class="sr-only">(current)</span></a>  --}}
+        {{--  @if(auth.isLoggedIn)
+        <a class="nav-item nav-link" href="{{route('news.create')}}">Create</a>
+        @endif  --}}
+        
+        @if(auth.isLoggedIn)
+        <form action="{{route('auth.logout')}}" method="POST">
+          
+          <button class="nav-item nav-link btn-outline-success " type="submit">
+            Logout
+          </button>
+          
+        </form>
+        
+        @else
+        <a class="nav-item nav-link" href="{{route('auth.login.show')}}">Login</a>
+        <a class="nav-item nav-link" href="{{route('auth.register.show')}}">Register</a>
+        
+        @endif
+
+        {{--  @if(!auth.isLoggedIn)
+        <a class="nav-item nav-link" href="{{route('auth.register.show')}}">Register</a>
+        @endif  --}}
+        @if(auth.isAuthenticated)
+        <a href="/{{auth.user.username}}">
+          <img src="{{auth.user.avatar}}" style="height:40px;width:40px;border-radius:50%;" >
+        </a>
+        @endif
+
+        @if(auth.isAuthenticated && auth.user.email_verified_at === null)
+        <form action="{{route('email.verify')}}" method="POST">
+            <input type="submit" value="Resend">
+        </form>
+        @endif
+      </div>
+    </div>
+</nav>

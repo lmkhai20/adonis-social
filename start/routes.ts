@@ -20,20 +20,25 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.get('/', async ({ view }) => {
-  return view.render('welcome')
-})
+Route.get('/', 'HomeController.index')
 
-Route.get('/login', 'AuthController.loginShow').as('auth.login.show');
-Route.get('/register', 'AuthController.registerShow').as('auth.register.show');
+Route.get('/login', 'AuthController.loginShow').as('auth.login.show').middleware('guest');
+Route.get('/register', 'AuthController.registerShow').as('auth.register.show').middleware('guest');
 
 Route.post('/login', 'AuthController.login').as('auth.login');
 Route.post('/register', 'AuthController.register').as('auth.register');
 Route.post('logout', 'AuthController.logout').as('auth.logout');
 
-Route.on('/profile').render('auth/profile').as('auth.profile').middleware('auth');
 Route.post('/verify-email', 'EmailVerifiesController.index').as('email.verify').middleware('auth');
 Route.get('/verify-email/:email', 'EmailVerifiesController.confirm').as('verifyEmail');
+
+Route.get('/accounts/edit', 'ProfilesController.edit').as('profile.edit').middleware('auth');
+Route.post('/accounts/edit', 'ProfilesController.update').as('profile.update').middleware('auth');
+
+Route.get('/posts/create', 'PostsController.create').as('posts.create').middleware('auth');
+Route.post('/posts/create', 'PostsController.store').as('posts.store').middleware('auth');
+
+Route.get('/:username', 'ProfilesController.index').as('auth.profile').middleware('auth');
 
 
 

@@ -1,20 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-</head>
-<body>
+@layout('layouts/main')
+
+@section('content')
   It work !!!
-  @if(auth.isAuthenticated)
+
+  @each(post in posts)
+  <div class="container border border-secondary-subtle bg-white w-50 my-5" style="">
+    <div class="m-2 d-flex">
+      <img src="{{post.user.avatar}}" style="height:50px;width:50px;border-radius:50%;" alt="">
+      <p class="mx-3 mt-3"><strong>{{post.user.username}}</strong></p>
+    </div>
+    <img src="{{post.image}}" width="100%" alt="">
+    <p class="mt-2">{{post.caption}}</p>
+    <p><small>{{post.createdAt.toFormat('DD')}}</small></p>
+  </div>
+  
+  @endeach
+
+  {{--  @if(auth.isAuthenticated)
   <h3>{{auth.user.username}}</h3>
   <form action="{{route('auth.logout')}}" method="POST">
     <button type="submit">Sign out</button>
   </form>
   @else
   <a href="{{route('auth.login.show')}}">Login</a>
-  @endif
-</body>
-</html>
+  @endif  --}}
+
+
+@endsection
