@@ -41,6 +41,8 @@ Route.post('/posts/create', 'PostsController.store').as('posts.store').middlewar
 Route.post('/follow/:userid', 'FollowsController.store').as('follow.store').middleware('auth');
 Route.delete('/follow/:userid', 'FollowsController.destroy').as('follow.destroy').middleware('auth');
 
+Route.post('/search', 'ProfilesController.search').as('profile.search');
+
 Route.get('/:username', 'ProfilesController.index').as('auth.profile').middleware('auth');
 
 
