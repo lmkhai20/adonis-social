@@ -47,7 +47,13 @@ export default class ProfilesController {
         return response.redirect(`/${user.username}`);
     }
 
-    public async search({request, params}){
-        const input = request.input('search');
+    public async search({request, response}){
+        const input = request.input('inputSearch');
+        const user = await User.query().where('username', input);
+
+        // return results;
+        if(user){
+            return response.redirect(`/${input}`);
+        }
     }
 }
