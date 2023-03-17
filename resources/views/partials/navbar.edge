@@ -30,13 +30,13 @@
         @endif  --}}
         @if(auth.isAuthenticated)
         <a href="/{{auth.user.username}}">
-          <img src="{{auth.user.avatar}}" style="height:40px;width:40px;border-radius:50%;" >
+          <img src="{{auth.user.avatar}}" style="height:40px;width:40px;border-radius:50%;" class="float-sm-right" alt="">
         </a>
         @endif
 
         @if(auth.isAuthenticated && auth.user.email_verified_at === null)
-        <form action="{{route('email.verify')}}" method="POST">
-            <input type="submit" value="Resend">
+        <form action="{{route('email.verify')}}" method="POST" class="mt-2">
+            <input type="submit" value="Resend" >
         </form>
         @endif
       </div>

@@ -40,55 +40,58 @@
 
     </div>  --}}
 
-    <div>
+    {{--  <div>
         
         <div class="w-8/12">
             <div class="flex d-inline-flex p-2">
+                
                 <div class="d-flex justify-content-center justify-center">
                     <img src="{{user.avatar}}" class="p-2" width="250" height="250" style="border-radius:50%">
                 </div>
+
+                <div class="mx-3 mt-5 flex d-inline-flex">
                 <h1 class=""> {{user.username}} </h1>
-                {{--  @if(auth.user.id === user.id)  --}}
+
                 @if(auth.user.id === user.id)
                 <div class="mt-3">
                     <a href="{{route('profile.edit')}}" class="border border-gray-400 mx-4 rounded px-2 pt-1 font-semibold">Edit Profile</a>
                 </div>
-                @endif
-                {{--  @else  --}}
-                    {{--  @if(auth.user.followings.map(f => f.followingId).includes(user.id))  --}}
-                    <form action="" method="post">
-                        <button type="submit" class="text-white text-sm mx-4 mt-1 rounded px-2 py-1 font-semibold" style="background-color: rgba(var(--d69,0,149,246),1);" >Unfollow</button>
-                    </form>
-                    {{--  @else  --}}
-                        <form action="" method="post">
-                            <button type="submit" class="text-white text-sm mx-4 mt-1 rounded px-2 py-1 font-semibold" style="background-color: rgba(var(--d69,0,149,246),1);" >Follow</button>
+
+                @else
+                    @if(auth.user.followings.map(f => f.followingId).includes(user.id))
+                        <form action="{{`/follow/${user.id}?_method=DELETE`}}" method="post">
+                            <button type="submit" class="text-white text-sm mx-4 mt-2 rounded px-2 py-1 font-semibold" style="background-color: rgba(var(--d69,0,149,246),1);" >Unfollow</button>
                         </form>
-                    {{--  @endif  --}}
-                {{--  @endif  --}}
-                     
-                <div class="d-flex p-2">
-                    <p class="mr-8"><span class="font-semibold">{{user.posts.length}}</span> posts</p>
-                    <p class="mr-8"><span class="font-semibold">followers</span> followers</p>
-                    <p class="mr-8"><span class="font-semibold">user.followings.length</span> followings</p>
+                    @else
+                        <form action="{{`/follow/${user.id}`}}" method="post">
+                            <button type="submit" class="text-white text-sm mx-4 mt-2 rounded px-2 py-1 font-semibold" style="background-color: rgba(var(--d69,0,149,246),1);" >Follow</button>
+                        </form>
+                    @endif
+                @endif      
+
+                <div class="d-flex p-2 mt-2">
+                    <p class="mr-2"><span class="font-semibold">{{user.posts.length}}</span> posts </p>
+                    <p class="mr-2"><span class="font-semibold">{{followers}}</span> followers </p>
+                    <p class="mr-2"><span class="font-semibold">{{user.followings.length}}</span> followings</p>
                 </div>
+                </div>
+                <div class="col my-5">
+                    <p class="mr-8">
+                        {{user.details}}
+                    </p>
+                </div>
+
+
             </div>
 
-            {{--  <div class="d-flex p-2">
-                <p class="mr-8"><span class="font-semibold">user post length</span> posts</p>
-            <p class="mr-8"><span class="font-semibold">followers</span> followers</p>
-                <p class="mr-8"><span class="font-semibold">user.followings.length</span> followings</p>
-            </div>  --}}
 
-            <div class="flex my-5">
-                <p class="mr-8">
-                    {{user.details}}
-                </p>
-            </div>
         </div>
 
         <section class="border-t w-full mt-20">
             <h2 class="text-center text-sm p-2">POSTS
-               <a href="{{route('posts.create')}}"><i class="fas fa-plus"></i></a>
+                @if(auth.user.id === user.id)
+                    <a href="{{route('posts.create')}}"><i class="fas fa-plus"></i></a>
+               @endif
             </h2>
             <article class="grid grid-cols-3 gap-10 px-1">
             @each(post in user.posts)
@@ -96,17 +99,63 @@
             @endeach
             </article>
         </section>
-    </div>
-
-    {{--  <div class="container flex justify-center" >
-        <div >
-            <img src="{{user.avatar}}" alt="" width="250" height="250" style="border-radius:50%">
-        </div>
-
-        <div>
-
-        </div>
-
     </div>  --}}
+
+    <div class="container text-center">
+        <div class="avt d-flex justify-content-center mt-4">
+            <div class="">
+                <img src="{{user.avatar}}" class="p-2" width="250" height="250" style="border-radius:50%">
+            </div>
+
+            <div>
+                <div class="mx-3 mt-5 flex d-inline-flex">
+                    <h1 class=""> {{user.username}} </h1>
+    
+                    @if(auth.user.id === user.id)
+                    <div class="mt-3">
+                        <a href="{{route('profile.edit')}}" class="border border-gray-400 mx-4 rounded px-2 pt-1 font-semibold">Edit Profile</a>
+                    </div>
+    
+                    @else
+                        @if(auth.user.followings.map(f => f.followingId).includes(user.id))
+                            <form action="{{`/follow/${user.id}?_method=DELETE`}}" method="post">
+                                <button type="submit" class="text-white text-sm mx-4 mt-2 rounded px-2 py-1 font-semibold" style="background-color: rgba(var(--d69,0,149,246),1);" >Unfollow</button>
+                            </form>
+                        @else
+                            <form action="{{`/follow/${user.id}`}}" method="post">
+                                <button type="submit" class="text-white text-sm mx-4 mt-2 rounded px-2 py-1 font-semibold" style="background-color: rgba(var(--d69,0,149,246),1);" >Follow</button>
+                            </form>
+                        @endif
+                    @endif      
+    
+                    <div class="d-flex p-2 mt-2">
+                        <p class="mr-2"><span class="font-semibold">{{user.posts.length}}</span> posts </p>
+                        <p class="mr-2"><span class="font-semibold">{{followers}}</span> followers </p>
+                        <p class="mr-2"><span class="font-semibold">{{user.followings.length}}</span> followings</p>
+                    </div>
+                </div>
+                <div class="my-5">
+                    <p class="mr-8">
+                        {{user.details}}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="post">
+            <section class="border-t w-full mt-20">
+                <h3 class="text-center text-sm p-2">POSTS
+                    @if(auth.user.id === user.id)
+                        <a href="{{route('posts.create')}}"><i class="fas fa-plus"></i></a>
+                   @endif
+                </h3>
+                <div class="justify-content-center d-inline-flex p-2 bd-highlight">
+                @each(post in user.posts)
+                    <img src="{{post.image}}" class="p-2 bd-highlight" style="height:250px;width:250px;border-radius:2px;" alt="">
+                @endeach
+                </div>
+            </section>
+        </div>
+    </div>
 
 @endsection
