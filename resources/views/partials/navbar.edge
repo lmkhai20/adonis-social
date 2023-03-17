@@ -1,38 +1,48 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark d-flex justify-content-between">
     <a class="navbar-brand" href="/">Adonisgram</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        {{--  <a class="nav-item nav-link active" href="">All Courses <span class="sr-only">(current)</span></a>  --}}
-        {{--  @if(auth.isLoggedIn)
-        <a class="nav-item nav-link" href="{{route('news.create')}}">Create</a>
-        @endif  --}}
         
         @if(auth.isLoggedIn)
         <form action="{{route('auth.logout')}}" method="POST">
-          
-          <button class="nav-item nav-link btn-outline-success " type="submit">
+          <button class="nav-item nav-link btn-outline-success" type="submit">
             Logout
-          </button>
-          
+          </button> 
         </form>
-        
         @else
         <a class="nav-item nav-link" href="{{route('auth.login.show')}}">Login</a>
         <a class="nav-item nav-link" href="{{route('auth.register.show')}}">Register</a>
-        
         @endif
 
         {{--  @if(!auth.isLoggedIn)
         <a class="nav-item nav-link" href="{{route('auth.register.show')}}">Register</a>
         @endif  --}}
+        <div>
         @if(auth.isAuthenticated)
-        <a href="/{{auth.user.username}}">
-          <img src="{{auth.user.avatar}}" style="height:40px;width:40px;border-radius:50%;" class="float-sm-right" alt="">
-        </a>
+        <div class="float-right">
+          <a href="/{{auth.user.username}}" class="">
+            <img src="{{auth.user.avatar}}" style="height:40px;width:40px;border-radius:50%;" alt="">
+          </a>
+        </div>
+        
+        {{--  <div class="dropdown show">
+          <a class="" id="dropdownMenuLink" data-toggle="dropdown">
+            <img src="{{auth.user.avatar}}" style="height:40px;width:40px;border-radius:50%;" alt="">
+          </a>
+        
+          <div class="dropdown-menu" id="menu-item" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </div>  --}}
         @endif
+      </div>
+
+      
 
         @if(auth.isAuthenticated && auth.user.email_verified_at === null)
         <form action="{{route('email.verify')}}" method="POST" class="mt-2">
@@ -42,3 +52,4 @@
       </div>
     </div>
 </nav>
+

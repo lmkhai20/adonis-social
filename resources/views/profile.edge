@@ -102,7 +102,7 @@
     </div>  --}}
 
     <div class="container text-center">
-        <div class="avt d-flex justify-content-center mt-4">
+        <div class="avt d-flex justify-content-center mt-4 border border-secondary-subtle bg-white">
             <div class="">
                 <img src="{{user.avatar}}" class="p-2" width="250" height="250" style="border-radius:50%">
             </div>
@@ -129,9 +129,9 @@
                     @endif      
     
                     <div class="d-flex p-2 mt-2">
-                        <p class="mr-2"><span class="font-semibold">{{user.posts.length}}</span> posts </p>
-                        <p class="mr-2"><span class="font-semibold">{{followers}}</span> followers </p>
-                        <p class="mr-2"><span class="font-semibold">{{user.followings.length}}</span> followings</p>
+                        <p class="mr-3"><span class="font-semibold">{{user.posts.length}}</span> posts </p>
+                        <p class="mr-3"><span class="font-semibold">{{followers}}</span> followers </p>
+                        <p class="mr-3"><span class="font-semibold">{{user.followings.length}}</span> followings</p>
                     </div>
                 </div>
                 <div class="my-5">
@@ -142,18 +142,23 @@
             </div>
         </div>
 
-        <div class="post">
-            <section class="border-t w-full mt-20">
-                <h3 class="text-center text-sm p-2">POSTS
-                    @if(auth.user.id === user.id)
-                        <a href="{{route('posts.create')}}"><i class="fas fa-plus"></i></a>
-                   @endif
-                </h3>
-                <div class="justify-content-center d-inline-flex p-2 bd-highlight">
+        <div class="post border border-secondary-subtle bg-white mt-3">
+            <section >
+                <div class="border border-secondary-subtle bg-white">
+                    <h3 class="text-center text-sm p-2">POSTS
+                        @if(auth.user.id === user.id)
+                            <a href="{{route('posts.create')}}"><i class="fas fa-plus"></i></a>
+                        @endif
+                    </h3>
+                </div>
+                <div class="justify-content-center d-inline-flex p-2 bd-highlight ">
                 @each(post in user.posts)
-                    <img src="{{post.image}}" class="p-2 bd-highlight" style="height:250px;width:250px;border-radius:2px;" alt="">
+                    <div class=""">
+                        <img src="{{post.image}}" class="p-2 bd-highlight" style="height:250px;width:250px;" alt="">
+                    </div>
                 @endeach
                 </div>
+                
             </section>
         </div>
     </div>
