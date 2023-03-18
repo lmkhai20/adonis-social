@@ -11,8 +11,14 @@
       <p class="mx-3 mt-3"><strong>{{post.user.username}}</strong></p>
     </div>
     <img src="{{post.image}}" width="100%" alt="">
-    <p class="mt-2">{{post.caption}}</p>
+    {{--  <p class="mt-2">{{post.caption}}</p>  --}}
+    <p class="mt-3"><strong> <a href="/{{post.user.username}}" class="font-semibold mr-3 text-dark">{{post.user.username}}</a></strong>{{post.caption}}</p>
     <p><small>{{post.createdAt.toFormat('DD')}}</small></p>
+    <div class="bg-white d-flex justify-content-around">
+      <div class="border border-secondary-subtle" style="padding-left:78px;padding-right:78px;">Like</div>
+      <div class="border border-secondary-subtle" style="padding-left:57px;padding-right:57px;">Comment</div>
+      <div class="border border-secondary-subtle" style="padding-left:72px;padding-right:72px;">Share</div>
+    </div>
   </div>
   
   @endeach

@@ -33,8 +33,10 @@ export default class AuthController {
 
     public async login({request, response, auth}){
         const { uid, password } = request.only(['uid', 'password']);
-        const user = await auth.attempt(uid, password);
-        return response.redirect(`${user.username}`);
+        // const user = await auth.attempt(uid, password);
+        await auth.attempt(uid, password);
+        return response.redirect('/');
+        // return response.redirect(`${user.username}`);
 
     }
 

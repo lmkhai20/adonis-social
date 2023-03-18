@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="position:fixed; top:0;left:0; right:0;">
-    <a class="navbar-brand" href="/">Adonisgram</a>
+    <a class="navbar-brand" style="margin-left:200px" href="/">Adonisgram</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -7,7 +7,7 @@
       <div class="navbar-nav ">
         
         <div class="flex d-inline-flex">
-          <form action="{{route('profile.search')}}" method="POST" class="d-flex" style="margin-left:250px">
+          <form action="{{route('profile.search')}}" method="POST" class="d-flex" style="margin-left:50px">
             <input class="bg-dark text-white form-control me-2" type="search" name="inputSearch" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success ml-2" type="submit">Search</button>
           </form>
@@ -50,7 +50,7 @@
       
 
         @if(auth.isAuthenticated && auth.user.email_verified_at === null)
-        <form action="{{route('email.verify')}}" method="POST" class="mt-2">
+        <form action="{{route('email.verify')}}" method="POST" class="mt-2 ml-3">
             <input type="submit" value="Resend" >
         </form>
         @endif
