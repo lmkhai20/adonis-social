@@ -24,6 +24,7 @@ export default class AuthController {
         user.username = req.username;
         user.email = req.email;
         user.password = req.password;
+        user.avatar = `images/default.jpeg`;
         await user.save();
 
         user.sendVerificationEmail();

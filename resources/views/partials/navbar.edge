@@ -16,7 +16,7 @@
             @if(auth.isAuthenticated)
             <div class="float-right">
               <a href="/{{auth.user.username}}" class="">
-                <img src="{{auth.user.avatar}}" style="height:40px;width:40px;border-radius:50%;" alt="">
+                <img src="{{`/${auth.user.avatar}`}}" style="height:40px;width:40px;border-radius:50%;" alt="">
               </a>
             </div>
             

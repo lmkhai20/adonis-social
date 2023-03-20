@@ -48,4 +48,9 @@ export default class PostsController {
           return response.redirect(`/${auth.user.username}`)
 
     }
+
+    public async show({ view, params }) {
+      const post = await Post.findBy('id', params.id);
+      return view.render('posts/show', {post});
+    }
 }

@@ -37,6 +37,7 @@ Route.post('/accounts/edit', 'ProfilesController.update').as('profile.update').m
 
 Route.get('/posts/create', 'PostsController.create').as('posts.create').middleware('auth');
 Route.post('/posts/create', 'PostsController.store').as('posts.store').middleware('auth');
+Route.get('/posts/show/:id', 'PostsController.show').as('posts.show').middleware('auth');
 
 Route.post('/follow/:userid', 'FollowsController.store').as('follow.store').middleware('auth');
 Route.delete('/follow/:userid', 'FollowsController.destroy').as('follow.destroy').middleware('auth');

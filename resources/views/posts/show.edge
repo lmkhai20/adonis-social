@@ -1,0 +1,18 @@
+@layout('layouts/main')
+
+@section('content')
+
+    <h1 class="text-center">Post details</h1>
+
+    <div class="container mt-5 text-center">
+        {{--  src = {{`/images/${article.image}`}}  --}}
+        <img src="{{`/${post.image}`}}" class="img-fluid" width="500">
+        <h3 class="display-5">{{post.caption}}</h3>
+    
+        {{--  <p class="lead">
+            {{course.description}}
+        </p>  --}}
+    
+    </div>
+
+@endsection
