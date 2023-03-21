@@ -14,10 +14,13 @@
     {{--  <p class="mt-2">{{post.caption}}</p>  --}}
     <p class="ml-3 mt-3"><strong> <a href="/{{post.user.username}}" class="font-semibold mr-3 text-dark">{{post.user.username}}</a></strong>{{post.caption}}</p>
     <p class="ml-3"><small>{{post.createdAt.toFormat('DD')}}</small></p>
-    <div class="bg-white d-flex justify-content-around">
-      <div class="border border-secondary-subtle" style="padding-left:78px;padding-right:78px;">Like</div>
+    <div class="bg-white d-flex justify-content-around border-top text-center">
+      {{--  <div class="border border-secondary-subtle" style="padding-left:78px;padding-right:78px;">Like</div>
       <div class="border border-secondary-subtle" style="padding-left:57px;padding-right:57px;">Comment</div>
-      <div class="border border-secondary-subtle" style="padding-left:72px;padding-right:72px;">Share</div>
+      <div class="border border-secondary-subtle" style="padding-left:72px;padding-right:72px;">Share</div>  --}}
+      <button class="col-4 border-0 btn" style="">Like</button>
+      <button class="col-4 border-0 btn" style="">Comment</button>
+      <button class="col-4 border-0 btn" style="">Share</button>
     </div>
   </div>
   
